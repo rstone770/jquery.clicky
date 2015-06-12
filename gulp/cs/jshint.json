@@ -1,0 +1,25 @@
+{
+  "curly": true,
+  "eqeqeq": true,
+  "forin": true,
+  "freeze": true,
+  "futurehostile": true,
+  "nocomma": true,
+  "nonbsp": true,
+  "nonew": true,
+  "singleGroups": true,
+  "undef": true,
+  "unused": true,
+
+  "globals": {
+    "__dirname": true,
+    "$": true,
+    "clearTimeout": true,
+    "console": true,
+    "document": true,
+    "jQuery": true,
+    "module": true,
+    "setTimeout": true,
+    "require": true
+  }
+}

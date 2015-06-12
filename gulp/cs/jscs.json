@@ -1,0 +1,41 @@
+{
+  "disallowFunctionDeclarations": true,
+  "disallowImplicitTypeConversion": ["numeric", "boolean", "binary", "string"],
+  "disallowKeywordsOnNewLine": ["else"],
+  "disallowMixedSpacesAndTabs": true,
+  "disallowMultipleLineBreaks": true,
+  "disallowMultipleLineStrings": true,
+  "disallowMultipleSpaces": true,
+  "disallowNamedUnassignedFunctions": true,
+  "disallowNewlineBeforeBlockStatements": true,
+  "requireAnonymousFunctions": true,
+  "requireBlocksOnNewline": true,
+  "requireCapitalizedConstructors": true,
+  "requireCurlyBraces": true,
+  "requireLineBreakAfterVariableAssignment": true,
+  "requireSpaceBetweenArguments": true,
+  "requireSpacesInAnonymousFunctionExpression": {
+    "beforeOpeningRoundBrace": true,
+    "beforeOpeningCurlyBrace": true
+  },
+  "requireSpacesInConditionalExpression": {
+    "afterTest": true,
+    "beforeConsequent": true,
+    "afterConsequent": true,
+    "beforeAlternate": true
+  },
+  "requireSpacesInForStatement": true,
+  "requireSpacesInFunction": {
+    "beforeOpeningRoundBrace": true,
+    "beforeOpeningCurlyBrace": true
+  },
+  "safeContextKeyword": "self",
+  "validateAlignedFunctionParameters": true,
+  "validateIndentation": 2,
+  "validateLineBreaks": "LF",
+  "validateNewlineAfterArrayElements": {
+    "maximum": 2
+  },
+  "validateParameterSeparator": ", ",
+  "validateQuoteMarks": "'"
+}

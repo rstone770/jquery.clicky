@@ -1,0 +1,18 @@
+{
+  "name": "jquery.clicky",
+  "version": "0.0.0",
+  "homepage": "https://github.com/rstone770/jquery.clicky",
+  "authors": [
+    "brenden snyder <rstone770@gmail.com>"
+  ],
+  "description": "Simple multiclick for jQuery.",
+  "main": "bin/jquery.clicky.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "jQuery"
+  ],
+  "license": "MIT",
+  "ignore": ["**/*", "!bin/*"]
+}
