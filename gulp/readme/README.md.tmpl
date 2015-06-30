@@ -39,7 +39,7 @@ Then start listening to events.
 ```JavaScript
 $(...).on('capture.clicky', function (e, capture) {
 	console.log('click!');
-}).on('capture.complete', function (e, capture) {
+}).on('complete.clicky', function (e, capture) {
 	console.log('you clicked ' + capture.clicks + ' times.');
 });
 ```
@@ -160,7 +160,7 @@ $(...).clicky({
 	 * Gets call on each capture. This determines how handlers should be called. By default handlers
 	 * are only called when the capture is completed and uses a greedy fall through strategy. 
 	 * 
-	 * @param  {!Object} capture Event click captured count and capture completion flag.
+	 * @param  {!Object} capture Event capture event with meta data and last capture event.
 	 * @param  {!Object} handlers A collection of handlers keyed to click capture count.
 	 */
 	handler: function (capture, handlers) { ... },

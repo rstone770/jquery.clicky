@@ -73,36 +73,44 @@ Clicky.prototype._bind = function () {
  * 
  * @param  {!jQuery.Event} e
  */
-Clicky.prototype._capture = function () {
+Clicky.prototype._capture = function (e) {
+  var self = this;
+
   this._clicks++;
 
-  this._dispath(false);
+  this._dispatch(e, false);
 
   if (this._clicks === 1) {
-    this._timeoutId = setTimeout(this._completeCapture.bind(this), this.options.capturePeriod);
+    this._timeoutId = setTimeout(function () {
+      self._completeCapture(e);
+    }, this.options.capturePeriod);
   }
 };
 
 /**
 * Completes and unbinds capturing.
+*
+* @param {jQuery.Event} e
 */
-Clicky.prototype._completeCapture = function () {
+Clicky.prototype._completeCapture = function (e) {
   clearTimeout(this._timeoutId);
 
-  this._dispath(true);
+  this._dispatch(e, true);
   this._reset();
 };
 
 /**
  * Invokes handler with current application state and dispatches matching events.
  *
+ * @param {!jQuery.Event} e
  * @param {!Boolean} complete
  */
-Clicky.prototype._dispath = function (complete) {
+Clicky.prototype._dispatch = function (e, complete) {
   var name = complete ? 'complete.clicky' : 'capture.clicky', 
       capture = {
         clicks: this._clicks,
-        complete: complete
+        complete: complete,
+        event: e
       };
 
   this._trigger(name, capture);
@@ -112,12 +120,14 @@ Clicky.prototype._dispath = function (complete) {
 
 /**
  * Element click handler that dispatches state update.
+ *
+ * @param {!jQuery.Event} e
  */
-Clicky.prototype._handleClick = function () {
-  this._capture();
+Clicky.prototype._handleClick = function (e) {
+  this._capture(e);
 
   if (this._clicks >= this.options.maxCaptures) {
-    this._completeCapture();
+    this._completeCapture(e);
   }
 };
 
