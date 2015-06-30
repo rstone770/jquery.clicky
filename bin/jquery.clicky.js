@@ -1,5 +1,5 @@
 /**!
- * jquery.clicky v0.0.2
+ * jquery.clicky v0.0.3
  * http://www.github.com/rstone770/jquery.clicky
  *
  * Copyright 2015 Brenden Snyder
@@ -66,7 +66,7 @@ Clicky.prototype.destroy = function () {
   clearTimeout(this._timeoutId);
 
   this.$el.off('click.clicky', this._onClick);
-  this._trigger('destroy.clicky');
+  this._trigger(this.$el, 'destroy.clicky');
 };
 
 /**
@@ -121,7 +121,7 @@ Clicky.prototype._dispatch = function (e, complete) {
         event: e
       };
 
-  this._trigger(name, capture);
+  this._trigger(e.target, name, capture);
 
   this.options.handler.call(this.$el, capture, this.options.handlers);
 };
@@ -153,10 +153,11 @@ Clicky.prototype._reset = function () {
  * @example
  *   _trigger('meow.click', ...) => onMeow(...)
  * 
+ * @param {!jQuery.Element} on
  * @param {!String} trigger
  * @param {?Object} capture
  */
-Clicky.prototype._trigger = function (event, capture) {
+Clicky.prototype._trigger = function (on, event, capture) {
   var method = 'on' + event.split('.')[0].toUpperCase(),
       $this = this.$el;
 
@@ -164,7 +165,7 @@ Clicky.prototype._trigger = function (event, capture) {
     method.apply($this, slice.call(arguments, 1));
   }
 
-  $this.trigger(new $.Event(event, capture));
+  $(on).trigger(new $.Event(event, capture));
 };
 
 module.exports = Clicky;
@@ -344,7 +345,7 @@ module.exports = plugin;
    * 
    * @type {String}
    */
-  plugin.version = '0.0.2';
+  plugin.version = '0.0.3';
 
   /**
    * Restores previous clicky plugin and returns this plugins entry point.

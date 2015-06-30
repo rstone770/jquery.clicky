@@ -1,6 +1,6 @@
 {
   "name": "jquery.clicky",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Simple multiclick for jQuery.",
   "main": "bin/jquery.clicky.js",
   "scripts": {
@@ -16,15 +16,16 @@
   "author": "Brenden Snyder",
   "license": "MIT",
   "devDependencies": {
+    "browserify": "~10.2.4",
+    "glob": "^5.0.12",
     "gulp": "~3.9.0",
-    "gulp-jshint": "~1.11.0",
     "gulp-jscs": "~1.6.0",
+    "gulp-jshint": "~1.11.0",
+    "gulp-rename": "~1.2.2",
     "gulp-template": "~3.0.0",
     "gulp-uglify": "~1.2.0",
-    "gulp-rename": "~1.2.2",
-    "browserify": "~10.2.4",
-    "vinyl-source-stream": "~1.1.0",
+    "gulp-wrapper": "~1.0.0",
     "vinyl-buffer": "~1.0.0",
-    "gulp-wrapper": "~1.0.0"
+    "vinyl-source-stream": "~1.1.0"
   }
 }
