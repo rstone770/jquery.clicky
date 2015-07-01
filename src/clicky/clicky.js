@@ -80,11 +80,13 @@ Clicky.prototype._capture = function (e) {
 
   this._dispatch(e, false);
 
-  if (this._clicks === 1) {
-    this._timeoutId = setTimeout(function () {
-      self._completeCapture(e);
-    }, this.options.capturePeriod);
+  if (typeof this._timeoutId === 'number') {
+    clearTimeout(this._timeoutId);
   }
+
+  this._timeoutId = setTimeout(function () {
+    self._completeCapture(e);
+  }, this.options.capturePeriod);
 };
 
 /**

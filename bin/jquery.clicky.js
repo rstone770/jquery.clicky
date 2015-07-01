@@ -1,5 +1,5 @@
 /**!
- * jquery.clicky v0.0.3
+ * jquery.clicky v0.1.0
  * http://www.github.com/rstone770/jquery.clicky
  *
  * Copyright 2015 Brenden Snyder
@@ -88,11 +88,13 @@ Clicky.prototype._capture = function (e) {
 
   this._dispatch(e, false);
 
-  if (this._clicks === 1) {
-    this._timeoutId = setTimeout(function () {
-      self._completeCapture(e);
-    }, this.options.capturePeriod);
+  if (typeof this._timeoutId === 'number') {
+    clearTimeout(this._timeoutId);
   }
+
+  this._timeoutId = setTimeout(function () {
+    self._completeCapture(e);
+  }, this.options.capturePeriod);
 };
 
 /**
@@ -188,11 +190,11 @@ var defaults = {
   },
 
   /**
-   * Time period to accept captures before completing.
+   * Capture period increment amount for every capture.
    * 
    * @type {Number}
    */
-  capturePeriod: 250,
+  capturePeriod: 200,
 
   /**
    * Invoked on each capture state update. 
@@ -345,7 +347,7 @@ module.exports = plugin;
    * 
    * @type {String}
    */
-  plugin.version = '0.0.3';
+  plugin.version = '0.1.0';
 
   /**
    * Restores previous clicky plugin and returns this plugins entry point.

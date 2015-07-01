@@ -4,8 +4,7 @@ jQuery Clicky
 A multi-click jQuery plugin.
 
 ###Why
-jQuery has two types of click events that can be bound to an element, click and dblclick. The issue arises when different behaviors should be assigned for each type of click. For 
-instance, you have a nifty cart system that you want to add in the ability for the user to double click on an item to instantly add it their cart while single clicks should bring up a summary modal.
+jQuery has two types of click events that can be bound to an element, click and dblclick. The issue arises when different behaviors should be assigned for each type of click. For instance, you have a nifty cart system that you want to add in the ability for the user to double click on an item to instantly add it their cart while single clicks should bring up a summary modal.
 
 ```JavaScript
 	$(...).on('click', function () {
@@ -15,7 +14,9 @@ instance, you have a nifty cart system that you want to add in the ability for t
 	});
 ```
 
-Running this code produces undesired but expected results. When double clicking, the popup summary was triggered twice because double clicking also triggers the click event. The solution is simple. Defer triggering click events for a short capture period. During this time count the clicks and as the capture period expires, trigger an event. This library abstracts this basic idea by providing a reusable, highly configurable, and transparent API.
+Running this code produces undesired but expected results. When double clicking, the popup summary was triggered twice because double clicking also triggers the click event. The solution is simple. Defer triggering click events for a short capture period. After each click that falls within the capture period, count it and increment the capture length.
+
+_Prior to 0.1.0 the capture strategy just had a set capture period that would record arbitrary amount of captures until the time expired. This would always cause a bit of lag due to having the wait till the capture period expires. With the interval approach the delay in between capture and trigger is much shorter._
 
 ###Install
 Installing this plugin is pretty much like any other jQuery plugin. The recommended way is just to use bower.
@@ -58,7 +59,7 @@ $(...).clicky({
 		}
 	},
 	maxCaptures: 7,
-	capturePeriod: 1000
+	capturePeriod: 200
 });
 ```
 Perhaps an easier way to add handlers is simply using semantic handlers.
@@ -150,11 +151,11 @@ $(...).clicky({
 	},
 
 	/**
-	 * Time period to accept captures before completing.
+	 * Time period to accept captures after each click before completing.
 	 * 
 	 * @type {Number}
 	 */
-	capturePeriod: 250,
+	capturePeriod: 200,
 
 	/**
 	 * Gets call on each capture. This determines how handlers should be called. By default handlers

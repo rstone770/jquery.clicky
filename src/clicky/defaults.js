@@ -16,11 +16,11 @@ var defaults = {
   },
 
   /**
-   * Time period to accept captures before completing.
+   * Capture period increment amount for every capture.
    * 
    * @type {Number}
    */
-  capturePeriod: 250,
+  capturePeriod: 200,
 
   /**
    * Invoked on each capture state update. 
