@@ -1,5 +1,5 @@
 /**!
- * jquery.clicky v0.1.0
+ * jquery.clicky v0.1.1
  * http://www.github.com/rstone770/jquery.clicky
  *
  * Copyright 2015 Brenden Snyder
@@ -322,72 +322,67 @@ var plugin = function (handler, capturePeriod) {
 
 module.exports = plugin;
 },{"./clicky":1}],4:[function(require,module,exports){
-;(function ($) {
-  'use strict';
+var defaults = require('./clicky/defaults'),
+    plugin = require('./clicky/plugin');
 
-  var defaults = require('./clicky/defaults'),
-      plugin = require('./clicky/plugin');
+/**
+ * Old instance of clicky plugin.
+ * 
+ * @type {Function}
+ */
+var previous = $.fn.clicky;
 
-  /**
-   * Old instance of clicky plugin.
-   * 
-   * @type {Function}
-   */
-  var previous = $.fn.clicky;
+/**
+ * Plugin defaults.
+ *
+ * @type {Object}
+ */
+plugin.defaults = defaults;
 
-  /**
-   * Plugin defaults.
-   *
-   * @type {Object}
-   */
-  plugin.defaults = defaults;
+/**
+ * Plugin version.
+ * 
+ * @type {String}
+ */
+plugin.version = '0.1.1';
 
-  /**
-   * Plugin version.
-   * 
-   * @type {String}
-   */
-  plugin.version = '0.1.0';
+/**
+ * Restores previous clicky plugin and returns this plugins entry point.
+ * 
+ * @return {!Function}
+ */
+plugin.noConflict = function () {
+  $.fn.clicky = previous;
 
-  /**
-   * Restores previous clicky plugin and returns this plugins entry point.
-   * 
-   * @return {!Function}
-   */
-  plugin.noConflict = function () {
-    $.fn.clicky = previous;
+  return plugin;
+};
 
-    return plugin;
-  };
+/**
+ * Exports
+ */
+$.fn.clicky = plugin;
 
-  /**
-   * Exports
-   */
-  $.fn.clicky = plugin;
+/**
+ * Inline initialization
+ */
+$(function () {
+  $('[data-clicky-inline]').clicky();
+});
 
-  /**
-   * Inline initialization
-   */
-  $(function () {
-    $('[data-clicky-inline]').clicky();
-  });
+/**
+ * Data api.
+ *
+ * Lazily bind to an element once then forwards the first click event as a capture.
+ */
+$(document).on('click.clicky.data-api', '[data-clicky]', function (e) {
+  var $this = $(this),
+      bound = $(this).data('clicky.data-api');
 
-  /**
-   * Data api.
-   *
-   * Lazily bind to an element once then forwards the first click event as a capture.
-   */
-  $(document).on('click.clicky.data-api', '[data-clicky]', function (e) {
-    var $this = $(this),
-        bound = $(this).data('clicky.data-api');
-
-    if (!bound) {
-      $this
-        .clicky()
-        .trigger('click.clicky', e)
-        .data('clicky.data-api', true);
-    }
-  });
-
-}) (jQuery);
+  if (!bound) {
+    $this
+      .clicky()
+      .trigger('click.clicky', e)
+      .data('clicky.data-api', true);
+  }
+});
 },{"./clicky/defaults":2,"./clicky/plugin":3}]},{},[4]);
